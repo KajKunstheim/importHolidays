@@ -2,6 +2,7 @@
 
 import configparser
 import datetime
+import os
 import pprint
 import psycopg2
 import psycopg2.extras
@@ -47,6 +48,10 @@ psycopg2.extras.execute_values(DBCUR, 'INSERT INTO holiday (name, fkidtenant, dt
 DB.commit()
 
 # TODO: delete old holidays?
+
+# restart management console service. The management console (webinterface) won't see the changes to the database otherwise.
+# make sure the user you run this script with is allowed to run the command without beeig prompted for a password
+os.system('sudo service 3CXPhoneSystemMC01 restart')
 
 # close connection to DB
 DBCUR.close()
